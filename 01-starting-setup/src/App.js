@@ -1,15 +1,9 @@
+import { useState } from "react";
 import ExpenseItem from "./components/Expenses/ExpenseItem";
 import NewExpense from "./components/NewExpense/NewExpense";
 
 function App() {
-  const addExpenseHandler = (enteredExpense) => {
-    const expense = {
-      ...enteredExpense,
-    };
-    console.log("App");
-    console.log(expense);
-  };
-  const expenses = [
+  const expensesData = [
     {
       id: "e1",
       title: "Toilet Paper",
@@ -30,30 +24,30 @@ function App() {
       date: new Date(2021, 5, 12),
     },
   ];
+  const [expenses, setExpenses] = useState(expensesData);
+  const addExpenseHandler = (enteredExpense) => {
+    // const expense = {
+    //   ...enteredExpense,
+    // };
+    // console.log("App");
+    // console.log(expense);
+
+    setExpenses((prevExpenses) => {
+      return [enteredExpense, ...prevExpenses];
+    });
+  };
 
   return (
     <div className="App">
       <NewExpense OnAddExpense={addExpenseHandler} />
-      <ExpenseItem
-        title={expenses[0].title}
-        amount={expenses[0].amount}
-        date={expenses[0].date}
-      />
-      <ExpenseItem
-        title={expenses[1].title}
-        amount={expenses[1].amount}
-        date={expenses[1].date}
-      />
-      <ExpenseItem
-        title={expenses[2].title}
-        amount={expenses[2].amount}
-        date={expenses[2].date}
-      />
-      <ExpenseItem
-        title={expenses[3].title}
-        amount={expenses[3].amount}
-        date={expenses[3].date}
-      />
+      {expenses.map((expense, index) => (
+        <ExpenseItem
+          key={index}
+          title={expense.title}
+          amount={expense.amount}
+          date={expense.date}
+        />
+      ))}
     </div>
   );
 }
