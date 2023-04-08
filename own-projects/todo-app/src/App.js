@@ -1,9 +1,30 @@
-import { useState } from "react";
-import ExpenseItem from "./components/Expenses/ExpenseItem";
-import NewExpense from "./components/NewExpense/NewExpense";
+import ToDoList from "./components/ToDoList/ToDoList";
 
 function App() {
-  return <h1>To Do App</h1>;
+  const data = [
+    {
+      title: "Learn Javascript",
+      description: "Lorum ipsum ...",
+      status: "Completed",
+    },
+    {
+      title: "Learn React",
+      description: "Lorum ipsum ...",
+      status: "In Progress",
+    },
+    {
+      title: "Build a React App",
+      description: "Lorum ipsum ...",
+      status: "To Do",
+    },
+  ];
+
+  return (
+    <div>
+      <h1>THINGS TO DO</h1>
+      <ToDoList data={data} />
+    </div>
+  );
 }
 
 export default App;
